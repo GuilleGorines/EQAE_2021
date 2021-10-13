@@ -1,0 +1,64 @@
+#!/bin/bash
+: << COMMENT
+Kraken2 database created with the following assemblies, on October 13, 2021.
+-Homo sapiens (GCA_000001405.28), taxid: 9606, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
+-Canis lupus (GCA_905319855.2), taxid: 9612, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/319/855/GCA_905319855.2_mCanLor1.2/GCA_905319855.2_mCanLor1.2_genomic.fna.gz
+-Pipistrellus pipistrellus (GCA_903992545.1), taxid: 59474, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/903/992/545/GCA_903992545.1_mPipPip1.1/GCA_903992545.1_mPipPip1.1_genomic.fna.gz
+-Chlorocebus sabaeus (GCA_015252025.1), taxid: 60711, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/015/252/025/GCA_015252025.1_Vero_WHO_p1.0/GCA_015252025.1_Vero_WHO_p1.0_genomic.fna.gz
+-Bos taurus (GCA_002263795.2 ), taxid: 9913, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/263/795/GCA_002263795.2_ARS-UCD1.2/GCA_002263795.2_ARS-UCD1.2_genomic.fna.gz
+-Mus musculus (GCA_000001635.9), taxid: 10090 , url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
+-Oryctolagus cuniculus (GCA_000003625.1), taxid: 9986 , url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
+COMMENT
+
+# Procedure:
+#   1. Prepare all assemblies, one by one:
+#       1.1 Download the assembly
+#       1.2 Unzip the assembly
+#       1.3 Change the headers so kraken 2 doesnt complain
+#
+#   2. Build the database
+#       2.1 Create the folder and go into it
+#       2.2 Download the taxonomy
+#       2.3 Add the assemblies to the database
+#       2.4 Build the database (params 35,31,7)
+
+wget -qO homo_sapiens_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
+gzip -d homo_sapiens_raw.fna.gz
+awk -v TAXID=9606 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' homo_sapiens_raw.fna > homo_sapiens_krakenrdy.fna
+
+wget -qO canis_lupus_raw.fna.gz  https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/319/855/GCA_905319855.2_mCanLor1.2/GCA_905319855.2_mCanLor1.2_genomic.fna.gz
+gzip -d canis_lupus_raw.fna.gz
+awk -v TAXID=9612 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' canis_lupus_raw.fna > canis_lupus_krakenrdy.fna
+
+wget -qO pipistrellus_pipistrellus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/903/992/545/GCA_903992545.1_mPipPip1.1/GCA_903992545.1_mPipPip1.1_genomic.fna.gz
+gzip -d pipistrellus_pipistrellus_raw.fna.gz
+awk -v TAXID=59474 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' pipistrellus_pipistrellus_raw.fna > pipistrellus_pipistrellus_krakenrdy.fna
+
+wget -qO chlorocebus_sabaeus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/015/252/025/GCA_015252025.1_Vero_WHO_p1.0/GCA_015252025.1_Vero_WHO_p1.0_genomic.fna.gz
+gzip -d chlorocebus_sabaeus_raw.fna.gz
+awk -v TAXID=60711 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' chlorocebus_sabaeus_raw.fna > chlorocebus_sabaeus_krakenrdy.fna
+
+wget -qO bos_taurus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/263/795/GCA_002263795.2_ARS-UCD1.2/GCA_002263795.2_ARS-UCD1.2_genomic.fna.gz
+gzip -d bos_taurus_raw.fna.gz
+awk -v TAXID=9913 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' bos_taurus_raw.fna > bos_taurus_krakenrdy.fna
+
+wget -qO mus_musculus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
+gzip -d mus_musculus_raw.fna.gz
+awk -v TAXID=10090 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' mus_musculus_raw.fna > mus_musculus_krakenrdy.fna
+
+wget -qO oryctolagus_cuniculus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
+gzip -d oryctolagus_cuniculus_raw.fna.gz
+awk -v TAXID=9986 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' oryctolagus_cuniculus_raw.fna > oryctolagus_cuniculus_krakenrdy.fna
+
+mkdir kraken2db_testing_pikavirus
+cd kraken2db_testing_pikavirus
+
+for file in *.fna
+do
+    kraken2-build --add-to-library $file --db kraken2db_testing_pikavirus
+done
+
+
+rm *fna
+
+kraken2-build --build --db kraken2db_testing_pikavirus --kmer-len 35 --minimizer-len 31 --minimizer-spaces 7

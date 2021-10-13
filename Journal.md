@@ -100,4 +100,14 @@ GCA_006451195.1	Monkeypox virus genome
 This sample displays a higher quantity of murine-related viruses, this points to mouse being the host.
 
 
-ViralRecon will be used with each of the references found on each of the samples. 
+ViralRecon will be used with each of the references found on each of the samples. The kraken database containing the host sequences will be built from the genomes of:
+
+-*Homo sapiens* (GCA_000001405.28), **taxid**: 9606, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
+-*Canis lupus* (GCA_905319855.2), **taxid**: 9612, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/319/855/GCA_905319855.2_mCanLor1.2/GCA_905319855.2_mCanLor1.2_genomic.fna.gz
+-*Pipistrellus pipistrellus* (GCA_903992545.1), **taxid**: 59474, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/903/992/545/GCA_903992545.1_mPipPip1.1/GCA_903992545.1_mPipPip1.1_genomic.fna.gz
+-*Chlorocebus sabaeus* (GCA_015252025.1), **taxid**: 60711, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/015/252/025/GCA_015252025.1_Vero_WHO_p1.0/GCA_015252025.1_Vero_WHO_p1.0_genomic.fna.gz
+-*Bos taurus* (GCA_002263795.2 ), **taxid**: 9913, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/263/795/GCA_002263795.2_ARS-UCD1.2/GCA_002263795.2_ARS-UCD1.2_genomic.fna.gz
+-*Mus musculus* (GCA_000001635.9), **taxid**: 10090 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
+-*Oryctolagus cuniculus* (GCA_000003625.1), **taxid**: 9986 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
+
+This choices are based on the results obtained by PikaVirus, and other typical hosts. With these, the kraken 2 database is created, by using the 
