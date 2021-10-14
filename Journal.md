@@ -110,4 +110,6 @@ ViralRecon will be used with each of the references found on each of the samples
 -*Mus musculus* (GCA_000001635.9), **taxid**: 10090 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
 -*Oryctolagus cuniculus* (GCA_000003625.1), **taxid**: 9986 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
 
-This choices are based on the results obtained by PikaVirus, and other typical hosts. With these, the kraken 2 database is created, by using the 
+This choices are based on the results obtained by PikaVirus, and other typical hosts. With these, the kraken 2 (v2.1.2) database is created.
+
+Sample 2 was Nanopore technology. Therefore, a different approach was needed. First of all, trimming was performed with porechop (v0.2.4)
