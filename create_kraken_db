@@ -50,15 +50,13 @@ wget -qO oryctolagus_cuniculus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/a
 gzip -d oryctolagus_cuniculus_raw.fna.gz
 awk -v TAXID=9986 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' oryctolagus_cuniculus_raw.fna > oryctolagus_cuniculus_krakenrdy.fna
 
-mkdir kraken2db_testing_pikavirus
-cd kraken2db_testing_pikavirus
+mkdir eqae_database_hosts
 
 for file in *.fna
 do
-    kraken2-build --add-to-library $file --db kraken2db_testing_pikavirus
+    kraken2-build --add-to-library $file --db eqae_database_hosts
 done
-
 
 rm *fna
 
-kraken2-build --build --db kraken2db_testing_pikavirus --kmer-len 35 --minimizer-len 31 --minimizer-spaces 7
+kraken2-build --build --db eqae_database_hosts --kmer-len 35 --minimizer-len 31 --minimizer-spaces 7
