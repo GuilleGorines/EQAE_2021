@@ -70,7 +70,7 @@ mkdir eqae_database_hosts
 
 kraken2-build --download-taxonomy --db eqae_database_hosts --use-ftp
 
-for file in *.fna
+for file in *_krakenrdy.fna
 do
     echo "Adding ${file} to the database"
     kraken2-build --add-to-library $file --db eqae_database_hosts
