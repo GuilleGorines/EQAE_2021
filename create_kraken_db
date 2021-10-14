@@ -1,6 +1,6 @@
 #!/bin/bash
 : << COMMENT
-Kraken2 database created with the following assemblies, on October 13, 2021.
+Kraken2 (version 2.1.2) database created with the following assemblies, on October 13, 2021.
 -Homo sapiens (GCA_000001405.28), taxid: 9606, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
 -Canis lupus (GCA_905319855.2), taxid: 9612, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/319/855/GCA_905319855.2_mCanLor1.2/GCA_905319855.2_mCanLor1.2_genomic.fna.gz
 -Pipistrellus pipistrellus (GCA_903992545.1), taxid: 59474, url: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/903/992/545/GCA_903992545.1_mPipPip1.1/GCA_903992545.1_mPipPip1.1_genomic.fna.gz
@@ -51,6 +51,8 @@ gzip -d oryctolagus_cuniculus_raw.fna.gz
 awk -v TAXID=9986 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' oryctolagus_cuniculus_raw.fna > oryctolagus_cuniculus_krakenrdy.fna
 
 mkdir eqae_database_hosts
+
+kraken2-build --download-taxonomy --db eqae_database_hosts --use-ftp
 
 for file in *.fna
 do
