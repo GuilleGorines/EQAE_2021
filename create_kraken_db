@@ -22,43 +22,59 @@ COMMENT
 #       2.3 Add the assemblies to the database
 #       2.4 Build the database (params 35,31,7)
 
+echo "Downloading and extracting \e[3mHomo sapiens reference"
 wget -qO homo_sapiens_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
 gzip -d homo_sapiens_raw.fna.gz
 awk -v TAXID=9606 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' homo_sapiens_raw.fna > homo_sapiens_krakenrdy.fna
+echo "Done"
 
+echo "Downloading and extracting \e[3mCanis lupus reference"
 wget -qO canis_lupus_raw.fna.gz  https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/319/855/GCA_905319855.2_mCanLor1.2/GCA_905319855.2_mCanLor1.2_genomic.fna.gz
 gzip -d canis_lupus_raw.fna.gz
 awk -v TAXID=9612 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' canis_lupus_raw.fna > canis_lupus_krakenrdy.fna
+echo "Done"
 
+echo "Downloading and extracting \e[3mPipistrellus pipistrellus\e[0m reference"
 wget -qO pipistrellus_pipistrellus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/903/992/545/GCA_903992545.1_mPipPip1.1/GCA_903992545.1_mPipPip1.1_genomic.fna.gz
 gzip -d pipistrellus_pipistrellus_raw.fna.gz
 awk -v TAXID=59474 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' pipistrellus_pipistrellus_raw.fna > pipistrellus_pipistrellus_krakenrdy.fna
+echo "Done"
 
+echo "Downloading and extracting \e[3mChlorocebus sabaeus\e[0m reference"
 wget -qO chlorocebus_sabaeus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/015/252/025/GCA_015252025.1_Vero_WHO_p1.0/GCA_015252025.1_Vero_WHO_p1.0_genomic.fna.gz
 gzip -d chlorocebus_sabaeus_raw.fna.gz
 awk -v TAXID=60711 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' chlorocebus_sabaeus_raw.fna > chlorocebus_sabaeus_krakenrdy.fna
+echo "Done"
 
+echo "Downloading and extracting \e[3mBos taurus\e[0m reference"
 wget -qO bos_taurus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/263/795/GCA_002263795.2_ARS-UCD1.2/GCA_002263795.2_ARS-UCD1.2_genomic.fna.gz
 gzip -d bos_taurus_raw.fna.gz
 awk -v TAXID=9913 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' bos_taurus_raw.fna > bos_taurus_krakenrdy.fna
+echo "Done"
 
+echo "Downloading and extracting \e[3mMus musculus\e[0m reference"
 wget -qO mus_musculus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
 gzip -d mus_musculus_raw.fna.gz
 awk -v TAXID=10090 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' mus_musculus_raw.fna > mus_musculus_krakenrdy.fna
+echo "Done"
+
+echo "Downloading and extracting \e[3mOrctolagus cuniculus\e[0m reference"
 
 wget -qO oryctolagus_cuniculus_raw.fna.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
 gzip -d oryctolagus_cuniculus_raw.fna.gz
 awk -v TAXID=9986 '/^>/{print ">sequence"++i"|kraken:taxid|"TAXID;next}{print}' oryctolagus_cuniculus_raw.fna > oryctolagus_cuniculus_krakenrdy.fna
+echo "Done"
 
+echo "Making the database: downloading taxonomy"
 mkdir eqae_database_hosts
 
 kraken2-build --download-taxonomy --db eqae_database_hosts --use-ftp
 
 for file in *.fna
 do
+    echo "Adding ${file} to the database"
     kraken2-build --add-to-library $file --db eqae_database_hosts
 done
 
-rm *fna
-
+echo "Making the database: building"
 kraken2-build --build --db eqae_database_hosts --kmer-len 35 --minimizer-len 31 --minimizer-spaces 7
