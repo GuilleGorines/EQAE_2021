@@ -47,8 +47,9 @@ grep "GCF_001619015.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
 
 
 # lablog to create the scripts
-cat samples_ref.txt | while read in; do arr=($in); echo "nextflow run /processing_Data/bioinformatics/pipelines/viralrecon_prod/main.nf -bg --input ../samplesheet_${arr[0]}.csv -profile hpc_isciii --outdir $(date '+%Y%m%d')_${arr[0]}_{arr[1]}assembly --callers none --kraken2_db "/processing_Data/bioinformatics/research/20210920_UNSGM-VIRAL-DRYLAB-EQAE_IC_C/ANALYSIS/02-kraken2_host_db/eqae_database_hosts" --protocol metagenomic --fasta ../../../REFERENCES/${arr[1]}.fna --gff ../../REFERENCES/${arr[1]}.gff --skip_vg --skip_markduplicates --save_align_intermeds -resume" > _01_assembly_${arr[0]}_${arr[1]}.sh; done
+cat samples_ref.txt | while read in; do arr=($in); echo "nextflow run /processing_Data/bioinformatics/pipelines/viralrecon_prod/main.nf -bg --input ../samplesheet_${arr[0]}.csv -profile hpc_isciii --outdir $(date '+%Y%m%d')_${arr[0]}_{arr[1]}assembly --callers none --kraken2_db "/processing_Data/bioinformatics/research/20210920_UNSGM-VIRAL-DRYLAB-EQAE_IC_C/ANALYSIS/02-kraken2_host_db/eqae_database_hosts" --protocol metagenomic --fasta ../../../REFERENCES/${arr[1]}.fna --gff ../../../REFERENCES/${arr[1]}.gff --skip_vg --skip_markduplicates --save_align_intermeds -resume" > _01_assembly_${arr[0]}_${arr[1]}.sh; done
 
+# NOTE: THOSE CONTAINING THE REF GCA_900155325.1 HAD THE -gff part removed manually
 
 # loop for nohup of all scripts
 for item in ./*.sh;
