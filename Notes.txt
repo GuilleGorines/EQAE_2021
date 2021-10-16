@@ -1,0 +1,63 @@
+GCA_005280495.1.fna.gz
+GCA_006451195.1.fna.gz
+GCA_014131225.1.fna.gz
+GCA_900155325.1.fna.gz **NO GFF**
+GCA_900187835.1.fna.gz
+GCF_000847965.1.fna.gz
+GCF_000859085.1.fna.gz
+GCF_000864565.1.fna.gz
+GCF_000913595.1.fna.gz
+GCF_001619015.1.fna.gz
+
+# Download the gff (ref GCA_900155325.1.fna.gz did not have one)
+wget -O GCA_005280495.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/005/280/495/GCA_005280495.1_ASM528049v1/GCA_005280495.1_ASM528049v1_genomic.gff.gz
+wget -O GCA_006451195.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/006/451/195/GCA_006451195.1_ASM645119v1/GCA_006451195.1_ASM645119v1_genomic.gff.gz
+wget -O GCA_014131225.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/014/131/225/GCA_014131225.1_ASM1413122v1/GCA_014131225.1_ASM1413122v1_genomic.gff.gz
+wget -O GCA_900155325.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/155/325/GCA_900155325.1_VARV_V563/GCA_900155325.1_VARV_V563_genomic.gff.gz
+wget -O GCA_900187835.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/187/835/GCA_900187835.1_lib01432/GCA_900187835.1_lib01432_genomic.gff.gz
+wget -O GCF_000847965.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/847/965/GCF_000847965.1_ViralProj14590/GCF_000847965.1_ViralProj14590_genomic.gff.gz
+wget -O GCF_000859085.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/859/085/GCF_000859085.1_ViralProj15204/GCF_000859085.1_ViralProj15204_genomic.gff.gz
+wget -O GCF_000864565.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/565/GCF_000864565.1_ViralProj16631/GCF_000864565.1_ViralProj16631_genomic.gff.gz
+wget -O GCF_000913595.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/913/595/GCF_000913595.1_ViralProj222261/GCF_000913595.1_ViralProj222261_genomic.gff.gz
+wget -O GCF_001619015.1.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/619/015/GCF_001619015.1_ViralProj318036/GCF_001619015.1_ViralProj318036_genomic.gff.gz
+
+# Rescue the references from the pikavirus database
+cp viral_assemblies_for_pikavirus/GCA_005280495.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCA_006451195.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCA_014131225.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCA_900155325.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCA_900187835.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCF_000847965.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCF_000859085.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCF_000864565.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCF_000913595.1.fna.gz EQUAE_RESCUED_REFERENCES
+cp viral_assemblies_for_pikavirus/GCF_001619015.1.fna.gz EQUAE_RESCUED_REFERENCES
+
+# getting the url from the tsv from pikavirus
+grep "GCA_005280495.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCA_006451195.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCA_014131225.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCA_900155325.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCA_900187835.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCF_000847965.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCF_000859085.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCF_000864565.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCF_000913595.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+grep "GCF_001619015.1.fna.gz" viral_assemblies.tsv >> paths_to_eqae_references
+
+
+# lablog to create the scripts
+cat samples_ref.txt | while read in; do arr=($in); echo "nextflow run /processing_Data/bioinformatics/pipelines/viralrecon_prod/main.nf -bg --input ../samplesheet_${arr[0]}.csv -profile hpc_isciii --outdir $(date '+%Y%m%d')_${arr[0]}_{arr[1]}assembly --callers none --kraken2_db "/processing_Data/bioinformatics/research/20210920_UNSGM-VIRAL-DRYLAB-EQAE_IC_C/ANALYSIS/02-kraken2_host_db/eqae_database_hosts" --protocol metagenomic --fasta ../../../REFERENCES/${arr[1]}.fna --gff ../../REFERENCES/${arr[1]}.gff --skip_vg --skip_markduplicates --save_align_intermeds -resume" > _01_assembly_${arr[0]}_${arr[1]}.sh; done
+
+
+# loop for nohup of all scripts
+for item in ./*.sh;
+do
+    samplename=$(echo $item | sed "s|./_01_assembly_||g" | sed "s/.sh//g" )
+    mkdir $samplename
+    cp $item $samplename
+    cd $samplename
+    nohup bash $item &> $(date '+%Y%m%d')_assembly_${samplename}.log &
+    cd ..
+done
+
