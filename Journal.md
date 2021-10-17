@@ -70,7 +70,6 @@ GCF_000913595.1	Human endogenous retrovirus K113 genome
 
 Presence of the Rabbit fibroma virus, endemic of the wild rabbit, suggests rabbit is a possible host in this sample. However, the presence of the Human endogenous retrovirus makes this sample rather confusing at first glance.
 
-
 Sample5:
 |Assembly       |Name                                                        |Meandepth|Standarddeviation|Mindepth|Maxdepth|Depthmedian|Sequence %>=1 Depth|Sequence %>=10 Depth|Sequence %>=50 Depth|Sequence %>=100 Depth|
 |---------------|------------------------------------------------------------|---------|-----------------|--------|--------|-----------|-------------------|--------------------|--------------------|---------------------|
@@ -99,7 +98,6 @@ GCA_006451195.1	Monkeypox virus genome
 
 This sample displays a higher quantity of murine-related viruses, this points to mouse being the host.
 
-
 ViralRecon will be used with each of the references found on each of the samples. The kraken database containing the host sequences will be built from the genomes of:
 
 -*Homo sapiens* (GCA_000001405.28), **taxid**: 9606, **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.28_GRCh38.p13/GCA_000001405.28_GRCh38.p13_genomic.fna.gz
@@ -110,6 +108,12 @@ ViralRecon will be used with each of the references found on each of the samples
 -*Mus musculus* (GCA_000001635.9), **taxid**: 10090 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
 -*Oryctolagus cuniculus* (GCA_000003625.1), **taxid**: 9986 , **url**: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/003/625/GCA_000003625.1_OryCun2.0/GCA_000003625.1_OryCun2.0_genomic.fna.gz
 
-This choices are based on the results obtained by PikaVirus, and other typical hosts. With these, the kraken 2 (v2.1.2) database is created.
+This choices are based on the results obtained by PikaVirus, and other typical hosts. With these, the kraken 2 (v2.1.2) database is created. The code for the process can be found in the file *create_kraken_db*, in this repository.
+
+Viralrecon also requires a gff file. The gff files for each assembly, which are not included in the PikaVirus database, were downloaded from the NCBI ftp:
+
+
+
+
 
 Sample 2 was Nanopore technology. Therefore, a different approach was needed. First of all, trimming was performed with porechop (v0.2.4)
