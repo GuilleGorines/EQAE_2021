@@ -17,11 +17,11 @@ Sample1:
 
 Chosen assemblies for Sample 1 are those covered at least in an 80%:
 
-GCA_005280495.1	Vaccinia virus strain=44/47.1 rMVA genome
-GCA_006451195.1	Monkeypox virus genome
-GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
-GCA_900155325.1	Variola virus genome
-GCA_900187835.1	Cowpox virus genome
+* GCA_005280495.1	Vaccinia virus strain=44/47.1 rMVA genome
+* GCA_006451195.1	Monkeypox virus genome
+* GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
+* GCA_900155325.1	Variola virus genome
+* GCA_900187835.1	Cowpox virus genome
 
 
 Sample3:
@@ -40,9 +40,9 @@ Sample3:
 |GCF_002987775.1|Kirsten murine sarcoma virus genome         |2.16     |4.47             |0       |19      |0          |30.47              |9.03                |0.0                 |0.0                  |
 
 Chosen assemblies for Sample 3 are those covered at least in an 80%:
-GCA_900187835.1	Cowpox virus genome
-GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
-GCA_006451195.1	Monkeypox virus genome
+* GCA_900187835.1	Cowpox virus genome
+* GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
+* GCA_006451195.1	Monkeypox virus genome
 
 However, mild presence (30-35% coverage) of the Harvey murine sarcoma virus (oncogenic ), and Kirsten murine sarcoma virus suggests the host is a murine. 
 
@@ -59,13 +59,13 @@ Sample4:
 
 Chosen assemblies for Sample 4 are those covered at least in an 80%:
 
-GCF_000847965.1	Rabbit fibroma virus strain=Kasza genome
-GCA_900187835.1	Cowpox virus genome
-GCA_005280495.1	Vaccinia virus strain=44/47.1 rMVA genome
-GCA_900155325.1	Variola virus genome
-GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
-GCA_006451195.1	Monkeypox virus genome
-GCF_000913595.1	Human endogenous retrovirus K113 genome
+* GCF_000847965.1	Rabbit fibroma virus strain=Kasza genome
+* GCA_900187835.1	Cowpox virus genome
+* GCA_005280495.1	Vaccinia virus strain=44/47.1 rMVA genome
+* GCA_900155325.1	Variola virus genome
+* GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
+* GCA_006451195.1	Monkeypox virus genome
+* GCF_000913595.1	Human endogenous retrovirus K113 genome
 
 
 Presence of the Rabbit fibroma virus, endemic of the wild rabbit, suggests rabbit is a possible host in this sample. However, the presence of the Human endogenous retrovirus makes this sample rather confusing at first glance.
@@ -89,12 +89,12 @@ Sample5:
 
 Chosen assemblies for Sample 5 are those covered at least in an 80%:
 
-GCA_900155325.1	Variola virus genome
-GCF_001619015.1	Mus musculus mobilized endogenous polytropic provirus genome
-GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
-GCF_000864565.1	PreXMRV-1 genome
-GCF_000859085.1	Murine type C retrovirus genome
-GCA_006451195.1	Monkeypox virus genome
+* GCA_900155325.1	Variola virus genome
+* GCF_001619015.1	Mus musculus mobilized endogenous polytropic provirus genome
+* GCA_014131225.1	Vaccinia virus strain=Ducapox vaccine genome
+* GCF_000864565.1	PreXMRV-1 genome
+* GCF_000859085.1	Murine type C retrovirus genome
+* GCA_006451195.1	Monkeypox virus genome
 
 This sample displays a higher quantity of murine-related viruses, this points to mouse being the host.
 
