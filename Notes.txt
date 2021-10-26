@@ -62,3 +62,43 @@ do
     cd ..
 done
 
+# assembly nanopore
+
+spades.py --nanopore /processing_Data/bioinformatics/research/20210920_UNSGM-VIRAL-DRYLAB-EQAE_IC_C/ANALYSIS/05-assemlby/trimming_porechop/
+ -o nanopore_assembly
+
+for 
+
+spades.py --
+
+
+
+for dir in *
+do
+    
+    echo "${dir}"
+    cd $dir
+
+    for file in *.bam
+    do
+        echo "${file}"
+        prefix=$(basename -s bam $file)
+        samtools view -F 4 $file > "${prefix}.sam" 
+    done
+
+    cd ..
+
+done
+
+
+
+cat samples_id.txt | while read in; do echo "mkdir $in;qsub -V -b y -j y -cwd -N TRIMMOMATIC.$in -q all.q@obelix03 -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 10 java -jar -Djava.io.tmpdir=../../../TMP/ /opt/Trimmomatic-0.33/trimmomatic-0.33.jar PE -threads 10 -phred33 ../../../RAW/"$in"_R1.fastq.gz ../../../RAW/"$in"_R2.fastq.gz       $in/"$in"_R1_filtered.fastq $in/"$in"_R1_unpaired.fastq $in/"$in"_R2_filtered.fastq $in/"$in"_R2_unpaired.fastq SLIDINGWINDOW:4:20 MINLEN:50"; done >> _01_preprocess.sh
+echo 'find . -name "*.fastq" -exec qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 pigz -p 5 {} \;' > _02_pgzip.sh
+
+
+unicycler -l ../trimming_porechop/Sample02/Sample02.fastq.gz --out Sample02_unicycler
+
+unicycler -1 ../trimming_trimmomatic/Sample01/ -2 ../trimming_trimmomatic/Sample01/ -o 
+unicycler -1 ../trimming_trimmomatic/Sample03/ -2 ../trimming_trimmomatic/Sample03/ -o 
+unicycler -1 ../trimming_trimmomatic/Sample04/ -2 ../trimming_trimmomatic/Sample04/ -o 
+unicycler -1 ../trimming_trimmomatic/Sample05/ -2 ../trimming_trimmomatic/Sample05/ -o 
