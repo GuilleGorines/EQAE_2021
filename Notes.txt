@@ -96,8 +96,8 @@ cat samples_id.txt | while read in; do echo "mkdir $in;qsub -V -b y -j y -cwd -N
 echo 'find . -name "*.fastq" -exec qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 pigz -p 5 {} \;' > _02_pgzip.sh
 
 
-qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 unicycler -l ../trimming_porechop/Sample02/Sample02.fastq.gz --out Sample02_unicycler
-
-qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample01/ -2 ../trimming_trimmomatic/Sample01/ -o Sample01_unicycler
-qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample03/ -2 ../trimming_trimmomatic/Sample03/ -o Sample03_unicycler
-qsub -V -b y -j y -cwd -N PGZIP -q all.q@obelix09,all.q@obelix10,all.q@obelix11 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample04/ -2 ../trimming_trimmomatic/Sample04/ -o Sample04_unicycler
+qsub -V -b y -j y -cwd -N UNICYCLER.Sample02 -q all.q@obelix14,all.q@obelix15,all.q@obelix16 -pe openmp 5 unicycler -l ../trimming_porechop/Sample02/Sample02_trimmed.fastq.gz --out Sample02_unicycler
+qsub -V -b y -j y -cwd -N UNICYCLER.Sample01 -q all.q@obelix14,all.q@obelix15,all.q@obelix16 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample01/Sample01_R1_filtered.fastq.gz -2 ../trimming_trimmomatic/Sample01/Sample01_R2_filtered.fastq.gz -o Sample01_unicycler
+qsub -V -b y -j y -cwd -N UNICYCLER.Sample03 -q all.q@obelix14,all.q@obelix15,all.q@obelix16 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample03/Sample03_R1_filtered.fastq.gz -2 ../trimming_trimmomatic/Sample03/Sample03_R2_filtered.fastq.gz -o Sample03_unicycler
+qsub -V -b y -j y -cwd -N UNICYCLER.Sample04 -q all.q@obelix14,all.q@obelix15,all.q@obelix16 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample04/Sample04_R1_filtered.fastq.gz -2 ../trimming_trimmomatic/Sample04/Sample04_R2_filtered.fastq.gz -o Sample04_unicycler
+qsub -V -b y -j y -cwd -N UNICYCLER.Sample05 -q all.q@obelix14,all.q@obelix15,all.q@obelix16 -pe openmp 5 unicycler -1 ../trimming_trimmomatic/Sample05/Sample05_R1_filtered.fastq.gz -2 ../trimming_trimmomatic/Sample05/Sample05_R2_filtered.fastq.gz -o Sample05_unicycler
