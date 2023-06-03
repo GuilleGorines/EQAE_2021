@@ -78,3 +78,6 @@ done
 
 echo "Making the database: building"
 kraken2-build --build --db eqae_database_hosts --kmer-len 35 --minimizer-len 31 --minimizer-spaces 7
+
+
+
